@@ -4,6 +4,15 @@ namespace MiddleLayer
 {
     public class CustomerBase
     {
+        public CustomerBase()
+        {
+            this.CustomerName = "";
+            this.PhoneNumber = "";
+            this.BillAmount = 0;
+            this.BillDate = new DateTime();
+            this.Address = "";
+        }
+
         public string CustomerName { get; set; }
         public string PhoneNumber { get; set; }
         public decimal BillAmount { get; set; }
