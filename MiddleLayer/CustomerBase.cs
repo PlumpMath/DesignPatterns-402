@@ -1,9 +1,11 @@
 ﻿using System;
+using InterfaceCustomer;
 
 namespace MiddleLayer
 {
-    public class CustomerBase
+    public class CustomerBase: ICustomer
     {
+        private IValidation<ICustomer> _validation = null;
         public CustomerBase()
         {
             this.CustomerName = "";
@@ -11,6 +13,11 @@ namespace MiddleLayer
             this.BillAmount = 0;
             this.BillDate = new DateTime();
             this.Address = "";
+        }
+
+        public CustomerBase(IValidation<ICustomer> validation)
+        {
+            _validation = validation;
         }
 
         public string CustomerName { get; set; }
@@ -21,7 +28,7 @@ namespace MiddleLayer
 
         public virtual void Validate()
         {
-            throw new Exception("Not Implemented");
+            _validation.Validate(this);
         }
     }
 }

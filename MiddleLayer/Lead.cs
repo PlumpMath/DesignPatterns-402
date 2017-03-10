@@ -1,20 +1,13 @@
 ﻿using System;
+using InterfaceCustomer;
 
 namespace MiddleLayer
 {
     public class Lead: CustomerBase
     {
-        public override void Validate()
+        public Lead(IValidation<ICustomer> validation): base(validation)
         {
-            if (CustomerName.Length == 0)
-            {
-                throw new Exception("Customer Name is required");
-            }
-
-            if (PhoneNumber.Length == 0)
-            {
-                throw new Exception("Phone Number is required");
-            }
+            
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
 using FactoryCustomer;
-using MiddleLayer;
+using InterfaceCustomer;
 
 namespace WinformCustomer
 {
     public partial class FrmCustomer : Form
     {
-        private CustomerBase cust = null;
+        private ICustomer cust = null;
 
         public FrmCustomer()
         {
