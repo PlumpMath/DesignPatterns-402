@@ -201,6 +201,7 @@
             this.DalLayer.Name = "DalLayer";
             this.DalLayer.Size = new System.Drawing.Size(121, 21);
             this.DalLayer.TabIndex = 39;
+            this.DalLayer.SelectedIndexChanged += new System.EventHandler(this.DalLayer_SelectedIndexChanged);
             // 
             // FrmCustomer
             // 

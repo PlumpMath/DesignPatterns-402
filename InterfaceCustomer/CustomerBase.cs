@@ -1,7 +1,7 @@
 ﻿using System;
-using InterfaceCustomer;
+using System.ComponentModel.DataAnnotations;
 
-namespace MiddleLayer
+namespace InterfaceCustomer
 {
     public class CustomerBase: ICustomer
     {
@@ -19,6 +19,9 @@ namespace MiddleLayer
         {
             _validation = validation;
         }
+
+        [Key]
+        public int Id { get; set; }
 
         public string CustomerType { get; set; }
         public string CustomerName { get; set; }

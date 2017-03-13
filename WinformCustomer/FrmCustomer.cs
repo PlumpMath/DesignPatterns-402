@@ -9,7 +9,7 @@ namespace WinformCustomer
 {
     public partial class FrmCustomer : Form
     {
-        private ICustomer cust = null;
+        private CustomerBase cust = null;
 
         public FrmCustomer()
         {
@@ -20,6 +20,7 @@ namespace WinformCustomer
         {
             DalLayer.Items.Add("ADODal");
             DalLayer.Items.Add("EFDal");
+            DalLayer.SelectedIndex = 0;
 
             txtBillingDate.Text = DateTime.Now.ToShortDateString();
             LoadGrid();
@@ -27,13 +28,13 @@ namespace WinformCustomer
 
         private void LoadGrid()
         {
-            IDal<ICustomer> custs = FactoryDAL<IDal<ICustomer>>.Create("ADODal");
+            IDal<CustomerBase> custs = FactoryDAL<IDal<CustomerBase>>.Create(DalLayer.Text);
             this.dataGridView1.DataSource = custs.Search();
         }
 
         private void cmbCustomerType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cust = Factory<ICustomer>.Create(cmbCustomerType.Text);
+            cust = Factory<CustomerBase>.Create(cmbCustomerType.Text);
         }
 
         private void SetCustomer()
@@ -62,9 +63,14 @@ namespace WinformCustomer
         private void btnAdd_Click(object sender, EventArgs e)
         {
             SetCustomer();
-            IDal<ICustomer> dal = Factory<IDal<ICustomer>>.Create("ADODal");
+            IDal<CustomerBase> dal = FactoryDAL<IDal<CustomerBase>>.Create("ADODal");
             dal.Add(cust); // In memory
             dal.Save(); // Physical commit
+        }
+
+        private void DalLayer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadGrid();
         }
     }
 }

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{99A2D2AE-3731-4BFB-9FBE-9A067F851BC0}</ProjectGuid>
+    <ProjectGuid>{D76E481B-281C-4656-8D09-4E0940DCFEAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InterfaceCustomer</RootNamespace>
-    <AssemblyName>InterfaceCustomer</AssemblyName>
+    <RootNamespace>EFDal</RootNamespace>
+    <AssemblyName>EFDal</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -41,10 +49,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerBase.cs" />
-    <Compile Include="ICustomer.cs" />
-    <Compile Include="IValidation.cs" />
+    <Compile Include="EFCustomerDal.cs" />
+    <Compile Include="EFDal.cs" />
+    <Compile Include="MissingDllHack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InterfaceCustomer\InterfaceCustomer.csproj">
+      <Project>{99a2d2ae-3731-4bfb-9fbe-9a067f851bc0}</Project>
+      <Name>InterfaceCustomer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InterfaceDal\InterfaceDal.csproj">
+      <Project>{5e479c7c-3999-401f-a6cd-e2c8aa4e2fda}</Project>
+      <Name>InterfaceDal</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

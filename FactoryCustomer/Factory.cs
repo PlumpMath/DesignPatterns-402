@@ -21,8 +21,8 @@ namespace FactoryCustomer
             if (ObjectsOfOurProjects == null)
             {
                 ObjectsOfOurProjects = new UnityContainer();
-                ObjectsOfOurProjects.RegisterType<ICustomer, Customer>("Customer", new InjectionConstructor(new CustomerValidationAll()));
-                ObjectsOfOurProjects.RegisterType<ICustomer, Lead>("Lead", new InjectionConstructor(new LeadValidation()));
+                ObjectsOfOurProjects.RegisterType<CustomerBase, Customer>("Customer", new InjectionConstructor(new CustomerValidationAll()));
+                ObjectsOfOurProjects.RegisterType<CustomerBase, Lead>("Lead", new InjectionConstructor(new LeadValidation()));
             }
             // Design pattern :- RIP Replace If with Poly
             return ObjectsOfOurProjects.Resolve<AnyType>(type);

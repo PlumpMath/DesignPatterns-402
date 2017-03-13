@@ -8,6 +8,7 @@ namespace InterfaceCustomer
 {
     public interface ICustomer
     {
+        int Id { get; set; }
         string CustomerType { get; set; }
         string CustomerName { get; set; }
         string PhoneNumber { get; set; }

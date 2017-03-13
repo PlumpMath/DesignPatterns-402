@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using AdoDotNetDAL;
+using EFDal;
 using InterfaceCustomer;
 using InterfaceDal;
 using Microsoft.Practices.Unity;
@@ -17,7 +18,8 @@ namespace FactoryDAL
             {
                 ObjectsOfOurProjects = new UnityContainer();
 
-                ObjectsOfOurProjects.RegisterType<IDal<ICustomer>, CustomerDAL>("ADODal");
+                ObjectsOfOurProjects.RegisterType<IDal<CustomerBase>, CustomerDAL>("ADODal");
+                ObjectsOfOurProjects.RegisterType<IDal<CustomerBase>, EFCustomerDal>("EFDal");
             }
             // Design pattern :- RIP Replace If with Poly
             return ObjectsOfOurProjects.Resolve<AnyType>(type, new ResolverOverride[]
