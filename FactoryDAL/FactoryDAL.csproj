@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CC8D1CB5-0F58-44E5-A82F-3DBC581F0EC3}</ProjectGuid>
+    <ProjectGuid>{13698C71-2AC9-4A38-9DFD-61B6D3879922}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AdoDotNetDAL</RootNamespace>
-    <AssemblyName>AdoDotNetDAL</AssemblyName>
+    <RootNamespace>FactoryDAL</RootNamespace>
+    <AssemblyName>FactoryDAL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,7 +30,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,18 +57,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerDAL.cs" />
-    <Compile Include="TemplateADO.cs" />
+    <Compile Include="FactoryDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdoDotNetDAL\AdoDotNetDAL.csproj">
+      <Project>{cc8d1cb5-0f58-44e5-a82f-3dbc581f0ec3}</Project>
+      <Name>AdoDotNetDAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CommonDal\CommonDal.csproj">
       <Project>{a25509db-6b12-4127-a7d6-aab955e5c466}</Project>
       <Name>CommonDal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FactoryCustomer\FactoryCustomer.csproj">
-      <Project>{6f98a9d6-1eff-4e33-b8fb-038cfd41ccbe}</Project>
-      <Name>FactoryCustomer</Name>
     </ProjectReference>
     <ProjectReference Include="..\InterfaceCustomer\InterfaceCustomer.csproj">
       <Project>{99a2d2ae-3731-4bfb-9fbe-9a067f851bc0}</Project>

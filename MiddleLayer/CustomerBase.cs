@@ -20,6 +20,7 @@ namespace MiddleLayer
             _validation = validation;
         }
 
+        public string CustomerType { get; set; }
         public string CustomerName { get; set; }
         public string PhoneNumber { get; set; }
         public decimal BillAmount { get; set; }

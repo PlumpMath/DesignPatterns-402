@@ -84,9 +84,17 @@
       <Project>{6f98a9d6-1eff-4e33-b8fb-038cfd41ccbe}</Project>
       <Name>FactoryCustomer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FactoryDAL\FactoryDAL.csproj">
+      <Project>{13698c71-2ac9-4a38-9dfd-61b6d3879922}</Project>
+      <Name>FactoryDAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InterfaceCustomer\InterfaceCustomer.csproj">
       <Project>{99a2d2ae-3731-4bfb-9fbe-9a067f851bc0}</Project>
       <Name>InterfaceCustomer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InterfaceDal\InterfaceDal.csproj">
+      <Project>{5e479c7c-3999-401f-a6cd-e2c8aa4e2fda}</Project>
+      <Name>InterfaceDal</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

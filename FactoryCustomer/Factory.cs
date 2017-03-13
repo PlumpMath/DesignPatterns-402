@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,21 +11,21 @@ using ValidationAlgorithms;
 
 namespace FactoryCustomer
 {
-    public static class Factory // Design pattern :- Simple Factory Pattern
+    public static class Factory<AnyType> // Design pattern :- Simple Factory Pattern
     {
-        private static IUnityContainer custs = null;
+        private static IUnityContainer ObjectsOfOurProjects = null;
         
-        public static ICustomer Create(string typeCust)
+        public static AnyType Create(string type)
         {
             // Design pattern :- Lazy loading != Eager loading
-            if (custs == null)
+            if (ObjectsOfOurProjects == null)
             {
-                custs = new UnityContainer();
-                custs.RegisterType<ICustomer, Customer>("Customer", new InjectionConstructor(new CustomerValidationAll()));
-                custs.RegisterType<ICustomer, Lead>("Lead", new InjectionConstructor(new LeadValidation()));
+                ObjectsOfOurProjects = new UnityContainer();
+                ObjectsOfOurProjects.RegisterType<ICustomer, Customer>("Customer", new InjectionConstructor(new CustomerValidationAll()));
+                ObjectsOfOurProjects.RegisterType<ICustomer, Lead>("Lead", new InjectionConstructor(new LeadValidation()));
             }
             // Design pattern :- RIP Replace If with Poly
-            return custs.Resolve<ICustomer>(typeCust);
+            return ObjectsOfOurProjects.Resolve<AnyType>(type);
         }
     }
 }

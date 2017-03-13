@@ -42,13 +42,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbCustomerType = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.DalLayer = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnValidate
             // 
             this.btnValidate.Location = new System.Drawing.Point(17, 93);
-            this.btnValidate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnValidate.Margin = new System.Windows.Forms.Padding(2);
             this.btnValidate.Name = "btnValidate";
             this.btnValidate.Size = new System.Drawing.Size(98, 28);
             this.btnValidate.TabIndex = 37;
@@ -60,7 +62,7 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(17, 131);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(586, 203);
@@ -69,7 +71,7 @@
             // txtAddress
             // 
             this.txtAddress.Location = new System.Drawing.Point(295, 67);
-            this.txtAddress.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAddress.Margin = new System.Windows.Forms.Padding(2);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(153, 55);
@@ -88,7 +90,7 @@
             // txtBillingDate
             // 
             this.txtBillingDate.Location = new System.Drawing.Point(295, 39);
-            this.txtBillingDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBillingDate.Margin = new System.Windows.Forms.Padding(2);
             this.txtBillingDate.Name = "txtBillingDate";
             this.txtBillingDate.Size = new System.Drawing.Size(110, 20);
             this.txtBillingDate.TabIndex = 25;
@@ -107,7 +109,7 @@
             // txtBillingAmount
             // 
             this.txtBillingAmount.Location = new System.Drawing.Point(295, 11);
-            this.txtBillingAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBillingAmount.Margin = new System.Windows.Forms.Padding(2);
             this.txtBillingAmount.Name = "txtBillingAmount";
             this.txtBillingAmount.Size = new System.Drawing.Size(110, 20);
             this.txtBillingAmount.TabIndex = 22;
@@ -126,7 +128,7 @@
             // txtPhoneNumber
             // 
             this.txtPhoneNumber.Location = new System.Drawing.Point(110, 67);
-            this.txtPhoneNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPhoneNumber.Margin = new System.Windows.Forms.Padding(2);
             this.txtPhoneNumber.Name = "txtPhoneNumber";
             this.txtPhoneNumber.Size = new System.Drawing.Size(110, 20);
             this.txtPhoneNumber.TabIndex = 26;
@@ -144,7 +146,7 @@
             // txtCustomerName
             // 
             this.txtCustomerName.Location = new System.Drawing.Point(110, 39);
-            this.txtCustomerName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCustomerName.Margin = new System.Windows.Forms.Padding(2);
             this.txtCustomerName.Name = "txtCustomerName";
             this.txtCustomerName.Size = new System.Drawing.Size(110, 20);
             this.txtCustomerName.TabIndex = 23;
@@ -166,7 +168,7 @@
             "Lead",
             "Customer"});
             this.cmbCustomerType.Location = new System.Drawing.Point(110, 9);
-            this.cmbCustomerType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbCustomerType.Margin = new System.Windows.Forms.Padding(2);
             this.cmbCustomerType.Name = "cmbCustomerType";
             this.cmbCustomerType.Size = new System.Drawing.Size(110, 21);
             this.cmbCustomerType.TabIndex = 20;
@@ -182,11 +184,31 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "Customer Type";
             // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(132, 93);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(88, 29);
+            this.btnAdd.TabIndex = 38;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // DalLayer
+            // 
+            this.DalLayer.FormattingEnabled = true;
+            this.DalLayer.Location = new System.Drawing.Point(472, 11);
+            this.DalLayer.Name = "DalLayer";
+            this.DalLayer.Size = new System.Drawing.Size(121, 21);
+            this.DalLayer.TabIndex = 39;
+            // 
             // FrmCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 344);
+            this.Controls.Add(this.DalLayer);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnValidate);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.txtAddress);
@@ -201,7 +223,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbCustomerType);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmCustomer";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FrmCustomer_Load);
@@ -227,6 +249,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbCustomerType;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.ComboBox DalLayer;
     }
 }
 

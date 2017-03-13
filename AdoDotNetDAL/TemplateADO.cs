@@ -27,6 +27,7 @@ namespace AdoDotNetDAL
         }
 
         protected abstract void ExecuteCommand(AnyType obj);
+        protected abstract List<AnyType> ExecuteCommand();
 
         private void CloseConnection()
         {
@@ -40,12 +41,25 @@ namespace AdoDotNetDAL
             CloseConnection();
         }
 
+        public List<AnyType> Execute()
+        {
+            OpenConnection();
+            var objectTypes = ExecuteCommand();
+            CloseConnection();
+            return objectTypes;
+        }
+
         public override void Save()
         {
             foreach (var obj in AnyTypes)
             {
                 Execute(obj);
             }
+        }
+
+        public override List<AnyType> Search()
+        {
+            return Execute();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace MiddleLayer
     {
         public Customer(IValidation<ICustomer> validation) : base(validation)
         {
-            
+            this.CustomerType = "Customer";
         }
     }
 }

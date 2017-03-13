@@ -7,7 +7,7 @@ namespace MiddleLayer
     {
         public Lead(IValidation<ICustomer> validation): base(validation)
         {
-            
+            CustomerType = "Lead";
         }
     }
 }
