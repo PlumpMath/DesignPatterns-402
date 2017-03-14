@@ -8,10 +8,6 @@ namespace AdoDotNetDAL
 {
     public class CustomerDAL: TemplateADO<CustomerBase>
     {
-        public CustomerDAL(string connectionString) : base(connectionString)
-        {
-        }
-
         protected override void ExecuteCommand(CustomerBase customer)
         {
             objCommand.CommandText = $@"INSERT INTO [dbo].[Customer]

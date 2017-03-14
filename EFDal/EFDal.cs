@@ -9,15 +9,22 @@ using InterfaceDal;
 namespace EFDal
 {
     // Design pattern: Adapter pattern
-    public class EFDalAbstract<AnyType>: DbContext, IDal<AnyType> where AnyType:class 
+    public class EFDalAbstract<AnyType>: IRepository<AnyType> where AnyType:class
     {
-        public EFDalAbstract(): base("name=CustomerContext")
+        private DbContext dbContext = null;
+        public EFDalAbstract()
         {
-            
+            dbContext = new EFUow();//Self contained transaction
         }
+
+        public void SetUnitOfWork(IUow uow)
+        {
+            dbContext = (EFUow)uow;// Global transaction UOW
+        }
+
         public void Add(AnyType obj)
         {
-            Set<AnyType>().Add(obj);// in memory commit
+            dbContext.Set<AnyType>().Add(obj);// in memory commit
         }
 
         public void Update(AnyType obj)
@@ -27,12 +34,12 @@ namespace EFDal
 
         public List<AnyType> Search()
         {
-            return Set<AnyType>().AsQueryable<AnyType>().ToList<AnyType>();
+            return dbContext.Set<AnyType>().AsQueryable<AnyType>().ToList<AnyType>();
         }
 
         public void Save()
         {
-            SaveChanges();//physical commit
+            dbContext.SaveChanges();//physical commit
         }
     }
 }

@@ -4,16 +4,15 @@ using InterfaceDal;
 
 namespace CommonDal
 {
-    public abstract class AbstractDal<AnyType> : IDal<AnyType>
+    public abstract class AbstractDal<AnyType> : IRepository<AnyType>
     {
-        protected string ConnectionString = "";
         protected List<AnyType> AnyTypes = new List<AnyType>();
 
-        public AbstractDal(string connectionString)
+        public virtual void SetUnitOfWork(IUow uow)
         {
-            ConnectionString = connectionString;
+            throw new NotImplementedException();
         }
-        
+
         public virtual void Add(AnyType obj)
         {
             AnyTypes.Add(obj);

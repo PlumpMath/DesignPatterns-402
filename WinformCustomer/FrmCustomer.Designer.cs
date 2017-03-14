@@ -44,6 +44,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.DalLayer = new System.Windows.Forms.ComboBox();
+            this.btnUOW = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -203,11 +204,22 @@
             this.DalLayer.TabIndex = 39;
             this.DalLayer.SelectedIndexChanged += new System.EventHandler(this.DalLayer_SelectedIndexChanged);
             // 
+            // btnUOW
+            // 
+            this.btnUOW.Location = new System.Drawing.Point(472, 83);
+            this.btnUOW.Name = "btnUOW";
+            this.btnUOW.Size = new System.Drawing.Size(104, 39);
+            this.btnUOW.TabIndex = 40;
+            this.btnUOW.Text = "UOW";
+            this.btnUOW.UseVisualStyleBackColor = true;
+            this.btnUOW.Click += new System.EventHandler(this.btnUOW_Click);
+            // 
             // FrmCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 344);
+            this.Controls.Add(this.btnUOW);
             this.Controls.Add(this.DalLayer);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnValidate);
@@ -252,6 +264,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ComboBox DalLayer;
+        private System.Windows.Forms.Button btnUOW;
     }
 }
 

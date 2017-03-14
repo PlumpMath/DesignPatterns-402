@@ -1,29 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommonDal;
 using System.Data;
 using System.Data.SqlClient;
+using InterfaceDal;
 
 namespace AdoDotNetDAL
 {
     public abstract class TemplateADO<AnyType>: AbstractDal<AnyType>
     {
+        private IUow _uow = null;
         protected SqlConnection objConn = null;
         protected SqlCommand objCommand = null;
 
-        public TemplateADO(string connectionString) : base(connectionString)
+        public override void SetUnitOfWork(IUow uow)
         {
+            _uow = uow;
+            objConn = ((AdoUow) uow).Connection;
+            objCommand = new SqlCommand();
+            objCommand.Connection = objConn;
+
+            objCommand.Transaction = ((AdoUow) uow).Transaction;
         }
 
         private void OpenConnection()
         {
-            objConn = new SqlConnection(ConnectionString);
-            objConn.Open();
-            objCommand = new SqlCommand();
-            objCommand.Connection = objConn;
+            if (objConn == null)
+            {
+                objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["CustomerContext"].ToString());
+                objConn.Open();
+                objCommand = new SqlCommand();
+                objCommand.Connection = objConn;
+            }
         }
 
         protected abstract void ExecuteCommand(AnyType obj);
@@ -31,7 +43,10 @@ namespace AdoDotNetDAL
 
         private void CloseConnection()
         {
-            objConn.Close();
+            if (_uow == null)
+            {
+                objConn.Close();
+            }
         }
 
         public void Execute(AnyType obj)

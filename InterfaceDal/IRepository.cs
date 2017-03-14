@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 namespace InterfaceDal
 {
     // Design pattern :- Generic Repository pattern
-    public interface IDal<AnyType>
+    public interface IRepository<AnyType>
     {
+        void SetUnitOfWork(IUow uow);
         void Add(AnyType obj); // In memory addtion
         void Update(AnyType obj); //In memory updation
         List<AnyType> Search();

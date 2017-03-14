@@ -18,14 +18,14 @@ namespace FactoryDAL
             {
                 ObjectsOfOurProjects = new UnityContainer();
 
-                ObjectsOfOurProjects.RegisterType<IDal<CustomerBase>, CustomerDAL>("ADODal");
-                ObjectsOfOurProjects.RegisterType<IDal<CustomerBase>, EFCustomerDal>("EFDal");
+                ObjectsOfOurProjects.RegisterType<IRepository<CustomerBase>, CustomerDAL>("ADODal");
+                ObjectsOfOurProjects.RegisterType<IRepository<CustomerBase>, EFDalAbstract<CustomerBase>>("EFDal");
+
+                ObjectsOfOurProjects.RegisterType<IUow, AdoUow>("ADOUow");
+                ObjectsOfOurProjects.RegisterType<IUow, EFUow>("EFUow");
             }
             // Design pattern :- RIP Replace If with Poly
-            return ObjectsOfOurProjects.Resolve<AnyType>(type, new ResolverOverride[]
-            {
-                new ParameterOverride("connectionString", ConfigurationManager.ConnectionStrings["CustomerContext"].ConnectionString),
-            });
+            return ObjectsOfOurProjects.Resolve<AnyType>(type);
         }
     }
 }

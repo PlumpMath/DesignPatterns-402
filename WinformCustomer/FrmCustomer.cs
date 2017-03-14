@@ -28,7 +28,7 @@ namespace WinformCustomer
 
         private void LoadGrid()
         {
-            IDal<CustomerBase> custs = FactoryDAL<IDal<CustomerBase>>.Create(DalLayer.Text);
+            IRepository<CustomerBase> custs = FactoryDAL<IRepository<CustomerBase>>.Create(DalLayer.Text);
             this.dataGridView1.DataSource = custs.Search();
         }
 
@@ -57,13 +57,13 @@ namespace WinformCustomer
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             SetCustomer();
-            IDal<CustomerBase> dal = FactoryDAL<IDal<CustomerBase>>.Create("ADODal");
+            IRepository<CustomerBase> dal = FactoryDAL<IRepository<CustomerBase>>.Create(DalLayer.Text);
             dal.Add(cust); // In memory
             dal.Save(); // Physical commit
         }
@@ -71,6 +71,40 @@ namespace WinformCustomer
         private void DalLayer_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadGrid();
+        }
+
+        private void btnUOW_Click(object sender, EventArgs e)
+        {
+            IUow uow = FactoryDAL<IUow>.Create("EFUow");
+            try
+            {
+                CustomerBase cust1 = new CustomerBase();
+                cust1.CustomerType = "Lead";
+                cust1.CustomerName = "Cust1";
+                cust1.BillDate = Convert.ToDateTime(txtBillingDate.Text);
+                IRepository<CustomerBase> dal1 = FactoryDAL<IRepository<CustomerBase>>.Create(DalLayer.Text);
+                dal1.SetUnitOfWork(uow);
+                dal1.Add(cust1);
+                dal1.Save();
+
+                CustomerBase cust2 = new CustomerBase();
+                cust2.CustomerType = "Lead";
+                cust2.CustomerName = "Cust2";
+                cust2.BillDate = Convert.ToDateTime(txtBillingDate.Text);
+                cust2.Address = "111111111111111111111111111111111111111111111111111111111111111";
+                IRepository<CustomerBase> dal2 = FactoryDAL<IRepository<CustomerBase>>.Create(DalLayer.Text);
+                dal2.SetUnitOfWork(uow);
+                dal2.Add(cust2);
+                dal2.Save();
+
+                uow.Commit();
+            }
+            catch (Exception ex)
+            {
+                uow.Rollback();
+                MessageBox.Show(ex.Message);
+            }
+            
         }
     }
 }
