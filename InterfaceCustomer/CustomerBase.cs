@@ -5,20 +5,17 @@ namespace InterfaceCustomer
 {
     public class CustomerBase: ICustomer
     {
-        private ICustomer _oldCopy = null;
         private IValidation<ICustomer> _validation = null;
-        public CustomerBase()
-        {
-            this.CustomerName = "";
-            this.PhoneNumber = "";
-            this.BillAmount = 0;
-            this.BillDate = new DateTime();
-            this.Address = "";
-        }
+        private IDiscount _discount = null;
+        private IExtraCharge _extraCharge = null;
+        //Desgin pattern :- memento pattern (Revert old state)
+        private ICustomer _oldCopy = null;
 
-        public CustomerBase(IValidation<ICustomer> validation)
+        public CustomerBase(IValidation<ICustomer> validation, IDiscount discount, IExtraCharge extraCharge)
         {
             _validation = validation;
+            _discount = discount;
+            _extraCharge = extraCharge;
         }
 
         [Key]
@@ -55,6 +52,11 @@ namespace InterfaceCustomer
             this.BillDate = _oldCopy.BillDate;
             this.CustomerType = _oldCopy.CustomerType;
             this.PhoneNumber = _oldCopy.PhoneNumber;
+        }
+
+        public decimal ActualCost()
+        {
+            return (BillAmount - _discount.Calculate(this)) + _extraCharge.Calculate(this);
         }
     }
 }

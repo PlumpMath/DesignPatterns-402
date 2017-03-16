@@ -18,5 +18,6 @@ namespace InterfaceCustomer
         void Validate();
         void Clone();// Create a copy of the object
         void Revert();// Revert back to the old copy
+        decimal ActualCost(); //ActualCost = (BillAmount - Discount) + ExtraCharges
     }
 }

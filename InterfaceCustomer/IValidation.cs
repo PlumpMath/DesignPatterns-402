@@ -5,4 +5,14 @@
     {
         void Validate(AnyTime obj);
     }
+
+    public interface IDiscount
+    {
+        decimal Calculate(ICustomer obj);
+    }
+
+    public interface IExtraCharge
+    {
+        decimal Calculate(ICustomer obj);
+    }
 }
