@@ -14,6 +14,7 @@ namespace InterfaceDal
         void Update(AnyType obj); //In memory updation
         List<AnyType> Search();
         IEnumerable<AnyType> GetData();
+        AnyType GetData(int index);
         void Save();// Physical commit
     }
 }

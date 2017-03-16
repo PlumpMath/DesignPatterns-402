@@ -31,19 +31,19 @@ namespace WinformCustomer
 
         private void LoadGrid()
         {
-            this.dataGridView1.DataSource = null;
-            this.dataGridView1.DataSource = Idal.Search();
+            this.dtgCustomer.DataSource = null;
+            this.dtgCustomer.DataSource = Idal.Search();
         }
 
         private void LoadGridInMemory()
         {
-            this.dataGridView1.DataSource = null;
-            this.dataGridView1.DataSource = Idal.GetData(); // In memory 
+            this.dtgCustomer.DataSource = null;
+            this.dtgCustomer.DataSource = Idal.GetData(); // In memory 
         }
 
         private void cmbCustomerType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cust = Factory<CustomerBase>.Create(cmbCustomerType.Text);
+            //cust = Factory<CustomerBase>.Create(cmbCustomerType.Text);
         }
 
         private void SetCustomer()
@@ -82,6 +82,7 @@ namespace WinformCustomer
         {
             try
             {
+                cust.Clone();
                 SetCustomer();
                 Idal.Add(cust); // In memory
                                 //Idal.Save(); // Physical commit
@@ -138,6 +139,29 @@ namespace WinformCustomer
             Idal.Save();
             LoadGrid();
             ClearCustomer();
+        }
+
+        private void dtgGridCustomer_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            cust = Idal.GetData(e.RowIndex);
+            LoadCustomerUI();
+        }
+
+        private void LoadCustomerUI()
+        {
+            txtCustomerName.Text = cust.CustomerName;
+            txtPhoneNumber.Text = cust.PhoneNumber;
+            txtAddress.Text = cust.Address;
+            txtBillingAmount.Text = cust.BillAmount.ToString();
+            txtBillingDate.Text = cust.BillDate.ToShortDateString();
+            cmbCustomerType.Text = cust.CustomerType;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            cust.Revert();
+            ClearCustomer();
+            LoadGridInMemory();
         }
     }
 }

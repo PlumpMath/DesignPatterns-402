@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using InterfaceDal;
 
 namespace CommonDal
@@ -15,12 +16,24 @@ namespace CommonDal
 
         public virtual void Add(AnyType obj)
         {
+            foreach (var temp in AnyTypes)
+            {
+                if (obj.Equals(temp))
+                {
+                    return;
+                }
+            }
             AnyTypes.Add(obj);
         }
 
         public IEnumerable<AnyType> GetData()
         {
             return AnyTypes;
+        }
+
+        public AnyType GetData(int index)
+        {
+            return AnyTypes[index];
         }
 
         public virtual void Save()

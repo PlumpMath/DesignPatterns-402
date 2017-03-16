@@ -42,6 +42,11 @@ namespace EFDal
             throw new NotImplementedException();
         }
 
+        public AnyType GetData(int index)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Save()
         {
             dbContext.SaveChanges();//physical commit

@@ -16,5 +16,7 @@ namespace InterfaceCustomer
         DateTime BillDate { get; set; }
         string Address { get; set; }
         void Validate();
+        void Clone();// Create a copy of the object
+        void Revert();// Revert back to the old copy
     }
 }

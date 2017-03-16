@@ -5,6 +5,7 @@ namespace InterfaceCustomer
 {
     public class CustomerBase: ICustomer
     {
+        private ICustomer _oldCopy = null;
         private IValidation<ICustomer> _validation = null;
         public CustomerBase()
         {
@@ -30,9 +31,30 @@ namespace InterfaceCustomer
         public DateTime BillDate { get; set; }
         public string Address { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            var customer = (ICustomer) obj;
+            return customer != null && Id == customer.Id;
+        }
+
         public virtual void Validate()
         {
             _validation.Validate(this);
+        }
+
+        public void Clone()
+        {
+            _oldCopy = (ICustomer)this.MemberwiseClone();
+        }
+
+        public void Revert()
+        {
+            this.CustomerName = _oldCopy.CustomerName;
+            this.Address = _oldCopy.Address;
+            this.BillAmount = _oldCopy.BillAmount;
+            this.BillDate = _oldCopy.BillDate;
+            this.CustomerType = _oldCopy.CustomerType;
+            this.PhoneNumber = _oldCopy.PhoneNumber;
         }
     }
 }

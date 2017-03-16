@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnValidate = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dtgCustomer = new System.Windows.Forms.DataGridView();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtBillingDate = new System.Windows.Forms.TextBox();
@@ -46,7 +46,8 @@
             this.DalLayer = new System.Windows.Forms.ComboBox();
             this.btnUOW = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.btnCancel = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgCustomer)).BeginInit();
             this.SuspendLayout();
             // 
             // btnValidate
@@ -60,15 +61,16 @@
             this.btnValidate.UseVisualStyleBackColor = true;
             this.btnValidate.Click += new System.EventHandler(this.btnValidate_Click);
             // 
-            // dataGridView1
+            // dtgCustomer
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(17, 131);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(586, 203);
-            this.dataGridView1.TabIndex = 32;
+            this.dtgCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgCustomer.Location = new System.Drawing.Point(17, 131);
+            this.dtgCustomer.Margin = new System.Windows.Forms.Padding(2);
+            this.dtgCustomer.Name = "dtgCustomer";
+            this.dtgCustomer.RowTemplate.Height = 24;
+            this.dtgCustomer.Size = new System.Drawing.Size(586, 203);
+            this.dtgCustomer.TabIndex = 32;
+            this.dtgCustomer.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgGridCustomer_RowEnter);
             // 
             // txtAddress
             // 
@@ -194,7 +196,7 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(88, 29);
             this.btnAdd.TabIndex = 38;
-            this.btnAdd.Text = "Add";
+            this.btnAdd.Text = "Add/Update";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -219,7 +221,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(128, 92);
+            this.btnSave.Location = new System.Drawing.Point(111, 93);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(92, 29);
             this.btnSave.TabIndex = 41;
@@ -227,17 +229,28 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(209, 93);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(82, 29);
+            this.btnCancel.TabIndex = 42;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // FrmCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 344);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnUOW);
             this.Controls.Add(this.DalLayer);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnValidate);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dtgCustomer);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtBillingDate);
@@ -254,7 +267,7 @@
             this.Name = "FrmCustomer";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FrmCustomer_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgCustomer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -263,7 +276,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnValidate;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dtgCustomer;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtBillingDate;
@@ -280,6 +293,7 @@
         private System.Windows.Forms.ComboBox DalLayer;
         private System.Windows.Forms.Button btnUOW;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
 
