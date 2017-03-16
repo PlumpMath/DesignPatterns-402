@@ -13,7 +13,7 @@ namespace InterfaceDal
         void Add(AnyType obj); // In memory addtion
         void Update(AnyType obj); //In memory updation
         List<AnyType> Search();
-        List<AnyType> GetData();
+        IEnumerable<AnyType> GetData();
         void Save();// Physical commit
     }
 }

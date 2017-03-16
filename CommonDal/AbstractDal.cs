@@ -18,7 +18,7 @@ namespace CommonDal
             AnyTypes.Add(obj);
         }
 
-        public List<AnyType> GetData()
+        public IEnumerable<AnyType> GetData()
         {
             return AnyTypes;
         }
