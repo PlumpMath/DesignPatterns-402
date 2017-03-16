@@ -9,9 +9,9 @@ namespace MiddleLayer
 {
     public class Customer: CustomerBase
     {
-        public Customer(IValidation<ICustomer> validation) : base(validation)
+        public Customer(IValidation<ICustomer> validation, string custType) : base(validation)
         {
-            this.CustomerType = "Customer";
+            this.CustomerType = custType;
         }
     }
 }

@@ -21,8 +21,25 @@ namespace FactoryCustomer
             if (ObjectsOfOurProjects == null)
             {
                 ObjectsOfOurProjects = new UnityContainer();
-                ObjectsOfOurProjects.RegisterType<CustomerBase, Customer>("Customer", new InjectionConstructor(new CustomerValidationAll()));
-                ObjectsOfOurProjects.RegisterType<CustomerBase, Lead>("Lead", new InjectionConstructor(new LeadValidation()));
+
+                //Lead
+                IValidation<ICustomer> leadValidation = new PhoneValidation(new CustomerBasicValidation());
+                ObjectsOfOurProjects.RegisterType<CustomerBase, Customer>("Lead", new InjectionConstructor(leadValidation, "Lead"));
+
+                //SelfService
+                IValidation<ICustomer> selfServiceValidation = new CustomerBasicValidation();
+                ObjectsOfOurProjects.RegisterType<CustomerBase, Customer>("SelfService",
+                    new InjectionConstructor(selfServiceValidation, "SelfService"));
+
+                //HomeDelivery
+                IValidation<ICustomer> homeDeliveryValidation = new AddressValidation(new CustomerBasicValidation());
+                ObjectsOfOurProjects.RegisterType<CustomerBase, Customer>("HomeDelivery",
+                    new InjectionConstructor(homeDeliveryValidation, "HomeDelivery"));
+
+                //Customer
+                IValidation<ICustomer> customerValidation = new AddressValidation(new BillDateValidation(new BillAmountValidation(new PhoneValidation(new CustomerBasicValidation()))));
+                ObjectsOfOurProjects.RegisterType<CustomerBase, Customer>("Customer", new InjectionConstructor(customerValidation, "Customer"));
+                
             }
             // Design pattern :- RIP Replace If with Poly
             return ObjectsOfOurProjects.Resolve<AnyType>(type);

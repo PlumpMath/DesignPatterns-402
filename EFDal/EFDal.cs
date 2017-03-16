@@ -37,6 +37,11 @@ namespace EFDal
             return dbContext.Set<AnyType>().AsQueryable<AnyType>().ToList<AnyType>();
         }
 
+        public List<AnyType> GetData()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Save()
         {
             dbContext.SaveChanges();//physical commit

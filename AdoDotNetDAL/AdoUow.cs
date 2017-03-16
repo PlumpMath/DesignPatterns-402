@@ -22,7 +22,7 @@ namespace AdoDotNetDAL
             Connection.Close();
         }
 
-        public void Rollback() // Design pattern :- object Adapter pattern
+        public void RollBack() // Design pattern :- object Adapter pattern
         {
             Transaction.Dispose();
             Connection.Close();

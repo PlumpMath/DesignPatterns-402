@@ -46,6 +46,7 @@ namespace AdoDotNetDAL
             if (_uow == null)
             {
                 objConn.Close();
+                objConn = null;
             }
         }
 

@@ -8,9 +8,17 @@ namespace AdoDotNetDAL
 {
     public class CustomerDAL: TemplateADO<CustomerBase>
     {
+        public override void Add(CustomerBase obj)
+        {
+            obj.Validate();
+            base.Add(obj);
+        }
+
         protected override void ExecuteCommand(CustomerBase customer)
         {
-            objCommand.CommandText = $@"INSERT INTO [dbo].[Customer]
+            if (customer.Id == 0)
+            {
+                objCommand.CommandText = $@"INSERT INTO [dbo].[Customer]
                                        ([CustomerType]
                                        ,[CustomerName]
                                        ,[BillAmount]
@@ -24,7 +32,12 @@ namespace AdoDotNetDAL
                                        ,'{customer.BillDate}'
                                        ,'{customer.PhoneNumber}'
                                        ,'{customer.Address}')";
-            objCommand.ExecuteNonQuery();
+                objCommand.ExecuteNonQuery();
+            }
+            else
+            {
+                //Update
+            }
         }
 
         protected override List<CustomerBase> ExecuteCommand()
@@ -32,7 +45,6 @@ namespace AdoDotNetDAL
             objCommand.CommandText = "select * from Customer";
             SqlDataReader dr = null;
             dr = objCommand.ExecuteReader();
-            List<CustomerBase> custs = new List<CustomerBase>();
             while (dr.Read())
             {
                 CustomerBase icust = Factory<CustomerBase>.Create(dr["CustomerType"].ToString());
@@ -43,9 +55,9 @@ namespace AdoDotNetDAL
                 icust.BillDate = Convert.ToDateTime(dr["BillDate"]);
                 icust.PhoneNumber = dr["PhoneNumber"].ToString();
                 icust.Address = dr["Address"].ToString();
-                custs.Add(icust);
+                AnyTypes.Add(icust);
             }
-            return custs;
+            return AnyTypes;
         }
     }
 }

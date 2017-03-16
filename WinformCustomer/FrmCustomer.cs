@@ -10,6 +10,7 @@ namespace WinformCustomer
     public partial class FrmCustomer : Form
     {
         private CustomerBase cust = null;
+        private IRepository<CustomerBase> Idal = null;
 
         public FrmCustomer()
         {
@@ -22,14 +23,22 @@ namespace WinformCustomer
             DalLayer.Items.Add("EFDal");
             DalLayer.SelectedIndex = 0;
 
-            txtBillingDate.Text = DateTime.Now.ToShortDateString();
+            Idal = FactoryDAL<IRepository<CustomerBase>>.Create(DalLayer.Text);
+
+            ClearCustomer();
             LoadGrid();
         }
 
         private void LoadGrid()
         {
-            IRepository<CustomerBase> custs = FactoryDAL<IRepository<CustomerBase>>.Create(DalLayer.Text);
-            this.dataGridView1.DataSource = custs.Search();
+            this.dataGridView1.DataSource = null;
+            this.dataGridView1.DataSource = Idal.Search();
+        }
+
+        private void LoadGridInMemory()
+        {
+            this.dataGridView1.DataSource = null;
+            this.dataGridView1.DataSource = Idal.GetData(); // In memory 
         }
 
         private void cmbCustomerType_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,11 +55,20 @@ namespace WinformCustomer
             cust.BillDate = Convert.ToDateTime(txtBillingDate.Text);
         }
 
+        private void ClearCustomer()
+        {
+            txtCustomerName.Text = "";
+            txtPhoneNumber.Text = "";
+            txtBillingAmount.Text = "0";
+            txtAddress.Text = "";
+            txtBillingDate.Text = DateTime.Now.ToShortDateString();
+        }
+
         private void btnValidate_Click(object sender, EventArgs e)
         {
-            SetCustomer();
             try
             {
+                SetCustomer();
                 cust.Validate();
             }
             catch (Exception ex)
@@ -62,14 +80,24 @@ namespace WinformCustomer
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            SetCustomer();
-            IRepository<CustomerBase> dal = FactoryDAL<IRepository<CustomerBase>>.Create(DalLayer.Text);
-            dal.Add(cust); // In memory
-            dal.Save(); // Physical commit
+            try
+            {
+                SetCustomer();
+                Idal.Add(cust); // In memory
+                                //Idal.Save(); // Physical commit
+                LoadGridInMemory();
+                ClearCustomer();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void DalLayer_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Idal = FactoryDAL<IRepository<CustomerBase>>.Create(DalLayer.Text);
             LoadGrid();
         }
 
@@ -85,7 +113,6 @@ namespace WinformCustomer
                 IRepository<CustomerBase> dal1 = FactoryDAL<IRepository<CustomerBase>>.Create(DalLayer.Text);
                 dal1.SetUnitOfWork(uow);
                 dal1.Add(cust1);
-                dal1.Save();
 
                 CustomerBase cust2 = new CustomerBase();
                 cust2.CustomerType = "Lead";
@@ -95,16 +122,22 @@ namespace WinformCustomer
                 IRepository<CustomerBase> dal2 = FactoryDAL<IRepository<CustomerBase>>.Create(DalLayer.Text);
                 dal2.SetUnitOfWork(uow);
                 dal2.Add(cust2);
-                dal2.Save();
 
                 uow.Commit();
             }
             catch (Exception ex)
             {
-                uow.Rollback();
+                uow.RollBack();
                 MessageBox.Show(ex.Message);
             }
             
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            Idal.Save();
+            LoadGrid();
+            ClearCustomer();
         }
     }
 }

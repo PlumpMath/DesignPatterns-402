@@ -18,6 +18,11 @@ namespace CommonDal
             AnyTypes.Add(obj);
         }
 
+        public List<AnyType> GetData()
+        {
+            return AnyTypes;
+        }
+
         public virtual void Save()
         {
             throw new NotImplementedException();

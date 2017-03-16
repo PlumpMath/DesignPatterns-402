@@ -22,7 +22,7 @@ namespace EFDal
             SaveChanges();
         }
 
-        public void Rollback() // Adapter
+        public void RollBack() // Adapter
         {
             Dispose();
         }

@@ -45,12 +45,13 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.DalLayer = new System.Windows.Forms.ComboBox();
             this.btnUOW = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnValidate
             // 
-            this.btnValidate.Location = new System.Drawing.Point(17, 93);
+            this.btnValidate.Location = new System.Drawing.Point(478, 37);
             this.btnValidate.Margin = new System.Windows.Forms.Padding(2);
             this.btnValidate.Name = "btnValidate";
             this.btnValidate.Size = new System.Drawing.Size(98, 28);
@@ -167,7 +168,9 @@
             this.cmbCustomerType.FormattingEnabled = true;
             this.cmbCustomerType.Items.AddRange(new object[] {
             "Lead",
-            "Customer"});
+            "Customer",
+            "SelfService",
+            "HomeDelivery"});
             this.cmbCustomerType.Location = new System.Drawing.Point(110, 9);
             this.cmbCustomerType.Margin = new System.Windows.Forms.Padding(2);
             this.cmbCustomerType.Name = "cmbCustomerType";
@@ -187,7 +190,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(132, 93);
+            this.btnAdd.Location = new System.Drawing.Point(17, 92);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(88, 29);
             this.btnAdd.TabIndex = 38;
@@ -214,11 +217,22 @@
             this.btnUOW.UseVisualStyleBackColor = true;
             this.btnUOW.Click += new System.EventHandler(this.btnUOW_Click);
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(128, 92);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(92, 29);
+            this.btnSave.TabIndex = 41;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // FrmCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 344);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnUOW);
             this.Controls.Add(this.DalLayer);
             this.Controls.Add(this.btnAdd);
@@ -265,6 +279,7 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ComboBox DalLayer;
         private System.Windows.Forms.Button btnUOW;
+        private System.Windows.Forms.Button btnSave;
     }
 }
 
